@@ -16,6 +16,7 @@ void MoveDown();
 void MoveLeft();
 void MoveRight();
 void Rotate();
+void Pause();
 void RecordBlocksNow();
 void ClearBlocks();
 bool IsGameOver();
@@ -47,10 +48,10 @@ void DrawEnvironment()
 	outtextxy(220, 260, _T("HELP:"));
 
 	settextstyle(16, 0, _T("Consolas"));
-	outtextxy(205, 300, _T("กü:rotate"));
-	outtextxy(205, 320, _T("กý:speed up"));
-	outtextxy(205, 340, _T("ก๛:left"));
-	outtextxy(205, 360, _T("ก๚:right"));
+	outtextxy(205, 300, _T("ยกรผ:rotate"));
+	outtextxy(205, 320, _T("ยกรฝ:speed up"));
+	outtextxy(205, 340, _T("ยกรป:left"));
+	outtextxy(205, 360, _T("ยกรบ:right"));
 	outtextxy(205, 380, _T("Space:suspend"));
 }
 void DrawBlock(int x, int y)
@@ -164,6 +165,8 @@ Cmd getCmd()
 				return Cmd_right;
 			case 80:
 				return Cmd_down;
+			case 32:
+				return Cmd_space;		
 			}
 		}
 		Sleep(20);
@@ -178,6 +181,14 @@ void Rotate()
 			nowshape = (nowshape + i) % 4;
 			break;
 		}
+	}
+}
+void Pause()
+{
+	while(true)
+	{
+		if(_getch() == 32)
+			break;
 	}
 }
 void transCmd(Cmd cmd)
